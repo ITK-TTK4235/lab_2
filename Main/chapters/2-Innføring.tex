@@ -4,13 +4,13 @@
 \section{Introduksjon - Praktisk rundt laben}
 I heisprosjektet skal dere bruke det dere har lært i de tidligere fem øvingene til å samarbeide om et større prosjekt, altså til utviklingen av programvare for logikkstyring av et fysisk system, i dette tilfellet en heismodell.
 
-Som dere vet, er programmeringsspråket \verb|C| et kraftig verktøy som regelmessig benyttes i et bredt spekter av industrisammenhenger, særlig i sanntidsapplikasjoner og maskinnær programvare. Denne laben går ut på å benytte \verb|C| til å implementere et styresystem for en fysisk heis-modell på Sanntidssalen (se introduksjon \ref{sec:2-innføringheis}), som styres gjennom en Arduino. I tillegg til selve implementasjonen, skal systemet beskrives og dokumenteres med UML før dere starter med selve implementasjonen.
+Som dere vet, er programmeringsspråket \verb|C| et kraftig verktøy som benyttes i et bredt spekter av industrielle sammenhenger, særlig i sanntidsapplikasjoner og maskinnær programvare. Denne laben går ut på å benytte \verb|C| til å implementere et styresystem for en fysisk heismodell på Sanntidssalen (se introduksjon \ref{sec:2-innføringheis}), som styres gjennom en Arduino. I tillegg til selve implementasjonen, skal systemet beskrives og dokumenteres med UML før dere starter med selve implementasjonen.
 
 For å strukturere arbeidet, og sikre verifikasjon av akseptkriterier, skal den pragmatiske V-modellen benyttes (se appendiks \ref{app:vmodell}), og den tilhørende rapporten skal speile dette. Flittig bruk av \verb|git| vil gjøre utførelsen av prosjektet enklere, og selv om dette ikke er obligatorisk, så er det anbefalt å bruke \verb|git| sammen med en kodevertsplattform slik som GitHub. Ettersom dere skal følge den pragmatiske V-modellen i dette prosjektet, er det derfor lurt at \verb|git|-historikken speiler dette.
 
 \subsection*{Godkjenning}
 
-Heis-laben teller ikke på sluttkarakteren, men må godkjennes for at dere skal kunne gå opp til eksamen. Prosjektet er konseptuelt delt i 3 deler (oppgaver), som i utgangspunktet må godkjennes:
+Heislaben teller ikke på sluttkarakteren, men må godkjennes for at dere skal kunne gå opp til eksamen. Prosjektet er konseptuelt delt i 3 deler (oppgaver), som i utgangspunktet må godkjennes:
 \begin{itemize}
     \item UML-del med klasse-, sekvens og tilstands-diagrammer. Dere skal her strukturere heis-prosjektet med ulike diagrammer for å beskrive implementasjonen før den blir skrevet.
     \item Implementasjons-del med en FAT (\textbf{F}actory \textbf{A}cceptance \textbf{T}est) (se appendiks \ref{subsec:FAT}). Dette er for å se at implementasjonen faktisk oppfører seg som en heis.
@@ -43,7 +43,7 @@ Som man kan se fra tabell \ref{tab:viktige-dato}, så blir FAT-en utført i uke 
 
 \section{Introduksjon - Praktisk rundt de utleverte filene}
 
-I denne laben får dere utlevert noen \verb|.c| og \verb|.h|-filer under \verb|skeleton_project|-mappen. Tabellen under lister opp alle filene som blir utlevert til bruk i heisprosjektet, samt litt informasjon om dere skal endre på filene eller om dere skal la dem bli i løpet av øvingen. I kontekst av tabellen under, så betyr \textit{helst ikke} at dere kan endre på filene, men at dette ikke burde gjøres siden det kan føre til andre komplikasjoner videre på veien. For eksempel: om det trengs mer kompliserte funksjoner enn de som allerede er definert i \verb|elevio|, så anbefales det å opprette filer som bruker de allerede definerte funksjonene i \verb|elevio| istedenfor å endre direkte på \verb|elevio|-funksjonene.
+I denne laben får dere utlevert noen \verb|.c| og \verb|.h|-filer under \verb|skeleton_project|-mappen. Tabellen under lister opp alle filene som blir utlevert til bruk i heisprosjektet, samt litt informasjon om hvorvidt dere skal endre på filene eller om dere skal la dem bli i løpet av øvingen. I kontekst av tabellen under, så betyr \textit{helst ikke} at dere kan endre på filene, men at dette ikke burde gjøres siden det kan føre til komplikasjoner seinere i prosjektet. For eksempel: om det trengs mer kompliserte funksjoner enn de som allerede er definert i \verb|elevio|, så anbefales det å opprette filer som bruker de allerede definerte funksjonene i \verb|elevio| istedenfor å endre direkte på \verb|elevio|-funksjonene.
 
 \begin{center}
  \begin{tabular}{|p{8.5cm} p{5.5cm}|} 
@@ -81,24 +81,24 @@ I denne laben får dere utlevert noen \verb|.c| og \verb|.h|-filer under \verb|s
 
 \section{Introduksjon - Heisen på sanntidslaben}\label{sec:2-innføringheis}
 
-Vi skal bruke en fysisk modell av en heis i løpet av prosjektet som skal styres med et styringssystem ved hjelp av en Arduino. heis-modellen består av tre hoveddeler; selve heismodellen, et betjeningspanel, og en motorstyringsboks. Det finnes en heis-modell på nesten hver av sanntidssalens arbeidsplasser. Hensikten med denne laben er at dere skal programmere oppførselen til heisen med \verb|C| uten å måtte ta hensyn til minnebegrensninger (Minnehåndtering i mikrokontrollere blir introdusert i mikrokontroller-laben).
+I løpet av prosjektet skal vi bruke en fysisk modell av en heis som skal styres med et styringssystem ved hjelp av en Arduino. Heismodellen består av tre hoveddeler; selve heismodellen, et betjeningspanel, og en motorstyringsboks. Det finnes en heismodell på nesten alle sanntidssalens arbeidsplasser. Hensikten med denne laben er at dere skal programmere oppførselen til heisen med \verb|C| uten å måtte ta hensyn til minnebegrensninger (Minnehåndtering i mikrokontrollere blir introdusert i mikrokontroller-laben).
 
 
 
-\subsection{Heis-modell}
-Heis-modellen er illustrert i figur \ref{fig:heis-modell-sal} og består av en heisstol som kan beveges opp og ned langs en stolpe. Dette tilsvarer henholdsvis heisrommet- og sjakten i en virkelig heis.
+\subsection{Heismodell}
+Heismodellen er illustrert i figur \ref{fig:heis-modell-sal} og består av en heisstol som kan beveges opp og ned langs en stolpe. Dette tilsvarer henholdsvis heisrommet og -sjakten i en virkelig heis.
 
 \begin{figure}[ht]
     \centering
     \includegraphics[scale=.85]{figures/HEIS.png}
-    \caption{Heis-modellen på sanntidslaben.}
+    \caption{Heismodellen på sanntidslaben.}
     \label{fig:heis-modell-sal}
 \end{figure}
 
-Langs heisbanen er det montert fire hall-effektsensorer som fungerer som heisens etasjer. Over øverste etasje, og under nederste etasje er det også montert endestoppbrytere, som vil kutte motorpådraget dersom heisen kjører utenfor sitt lovlige område. Dette er for å beskytte heisens motor mot skade. Om heisen skulle treffe en av endestoppene, må heisstolen manuelt skyves bort fra bryterne før en kan be motoren om et nytt pådrag.
+Langs heisbanen er det montert fire hall-effektsensorer som fungerer som heisens etasjer. Over øverste etasje, og under nederste etasje, er det også montert endestoppbrytere som vil kutte motorpådraget dersom heisen kjører utenfor sitt lovlige område. Dette er for å beskytte heisens motor mot skade. Om heisen skulle treffe en av endestoppene må heisstolen manuelt skyves bort fra bryterne før en kan be motoren om et nytt pådrag.
 
 \subsection{Betjeningsboks}
-Betjenings-boksen er delt i to; \textit{etasjepanel} og \textit{heispanel}. Disse kan man finne i figur \ref{fig:heis-modell-sal} og \ref{fig:paneler}. Øverst på betjeningsboksen finnes en bryter som velger om datamaskinen eller PLSen skal styre heismodellen. Denne skal stå i \verb|PC| gjennom hele laben.
+Betjeningsboksen er delt i to: \textit{etasjepanel} og \textit{heispanel}. Disse kan man finne i figur \ref{fig:heis-modell-sal} og \ref{fig:paneler}. Øverst på betjeningsboksen finnes en bryter som velger om datamaskinen eller PLSen skal styre heismodellen. Denne skal stå i \verb|PC| gjennom hele laben.
 
 \begin{figure}[ht]
     \centering
@@ -234,16 +234,16 @@ Betjenings-boksen er delt i to; \textit{etasjepanel} og \textit{heispanel}. Diss
 
 Etasjepanelet finnes på oversiden av betjeningsboksen. På dette panelet finner dere bestillingsknapper for opp- og nedretning fra hver etasje. Hver av knappene er utstyrt med lys som skal indikere om en bestilling er mottatt eller ei. Etasjepanelet har også et lys for hver etasje for å indikere hvilken etasje heisen befinner seg i.
 
-Heispanelet finnes på kortsiden av betjeningsboksen og representerer de knappene man forventer å finne inne i heisrommet til en vanlig heis. Her har man bestillingsknapper for hver etasje, samt en stoppknapp for nødstans. Alle knappene er utstyrt med lys som kan settes via styreprogrammet. I tillegg til knappene er panelet utstyrt med etasjeindikatorlys som kan settes via styreprogrammet og et lys, markert \verb|DØR ÅPEN|, som indikerer om heisdøren er åpen. Heispanelet har også en obstruksjonsbryter, som kan brukes for å simulere at en person blokkerer døren når den er åpen.
+Heispanelet finnes på kortsiden av betjeningsboksen og representerer de knappene man forventer å finne inne i heisrommet til en vanlig heis. Her har man bestillingsknapper for hver etasje, samt en stoppknapp for nødstans. Alle knappene er utstyrt med lys som kan settes via styreprogrammet. I tillegg til knappene er panelet utstyrt med etasjeindikatorlys som kan settes via styreprogrammet og et lys, markert \verb|DØR ÅPEN|, som indikerer om heisdøren er åpen. Heispanelet har også en obstruksjonsbryter som kan brukes for å simulere at en person blokkerer døren når den er åpen.
 
 \subsection{Motorstyringsboks}
 
-Styringsboksen er ansvarlig for å forsyne effekt til heis-modellen, og for å forsterke pådraget som settes av datamaskinen (se figur \ref{fig:heis-modell-sal}). Motoren kan forsynes med mellom 0- og 5 V, som henholdsvis er minimalt- og maksimalt pådrag. Veien motoren skal gå settes ved et ekstra retningsbit i styringsboksens grensesnitt. Alt dette gjøres via funksjonskall i styringsprogrammet. 
+Styringsboksen er ansvarlig for å forsyne effekt til heismodellen, og for å forsterke pådraget som settes av datamaskinen (se figur \ref{fig:heis-modell-sal}). Motoren kan forsynes med mellom 0 og 5 V, som henholdsvis er minimalt og maksimalt pådrag. Veien motoren skal gå settes ved et ekstra retningsbit i styringsboksens grensesnitt. Alt dette gjøres via funksjonskall i styringsprogrammet. 
 
-Det er også mulig å hente ut et analogt tacho-signal, samt en digital verdi for motorens encoder, for å lese av hastighet- og posisjon fra styringsboksen. Disse målesignalene trenger dere ikke ta stilling i dette prosjektet, men de nevnes for fullstendighetens skyld.
+Det er også mulig å hente ut et analogt tacho-signal, samt en digital verdi for motorens enkoder, for å lese av hastighet og posisjon fra styringsboksen. Disse målesignalene trenger dere ikke ta stilling i dette prosjektet, men de nevnes for fullstendighetens skyld.
 
 \subsection{Virkemåte og oppkobling}
-Heis-modellen er laget for å konseptuelt oppføre seg som en virkelig heis. Det er et par punkter man bør merke seg for å få den til å fungere som ønsket:
+Heismodellen er laget for å oppføre seg som en virkelig heis. Det er et par punkter man bør merke seg for å få den til å fungere som ønsket:
 
 \begin{itemize}
     \item Alle lys må settes eksplisitt. Det er ingen automatikk mellom hall-sensoren i hver etasje og tilhørende etasje-indikator.

@@ -66,33 +66,33 @@ V-modellen er illustrert i figur~\ref{fig:V-Modellen} Det kan være fristende å
 
 \subsection{Arkitekturdesign}
 
-Det aller viktigste er at man faktisk forstår kravene i spesifikasjonen. Når man først er sikre på hva som kreves av slutt-systemet, burde man tenke gjennom hvilke implikasjoner dette har for koden som skal skrives senere.
+Det aller viktigste er at man faktisk forstår kravene i spesifikasjonen. Når man først er sikre på hva som kreves av sluttsystemet, burde man tenke gjennom hvilke implikasjoner dette har for koden som skal skrives senere.
 
 På dette stadiet ønsker vi å bestemme en \textit{arkitektur} som vil oppfylle kravene fra spesifikasjonen. Dette innebærer å legge abstraksjonsnivået forholdsvis høyt, og ignorere implementasjonsdetaljer enn så lenge.
 
-\textbf{Eksempel}: Heisen skal kunne huske ordre helt til de blir ekspedert. Dersom man mener at køsystem er en god løsning på dette kravet må man ikke tenke: \textit{Dette skal jeg implementere som en lenket liste}, men heller: \textit{På arkitekturnivå trenger vi et køsystem}. Detaljer om hvordan et eventuelt køsystem er implementerert kommer ikke inn i bildet på dette stadiet.
+\textbf{Eksempel}: Heisen skal kunne huske ordre helt til de blir ekspedert. Dersom man mener at køsystem er en god løsning på dette kravet må man ikke tenke: \textit{Dette skal jeg implementere som en lenket liste}, men heller: \textit{På arkitekturnivå trenger vi et køsystem}. Detaljer om hvordan et eventuelt køsystem er implementerert kommer ikke inn i bildet på dette stadiet.\footnote{Det er ikke sikkert at et køsystem faktisk er nødvendig i dette prosjektet, dette er altså bare et eksempel}
 
-Resultatet av dette stadiet bør være ett eller flere klasse-diagrammer som illustrerer hvilke moduler styringssystemet skal bestå av. For å få en ide om hvilken funksjonalitet hver modul må tilby, kan det også være lurt å sette opp et par sekvensdiagrammer som illustrerer hvordan forskjellige moduler samarbeider. i tillegg, kan man også benytte kommunikasjons-diagrammer for å gi en bedre oversikt over grensesnittet mellom hver modul.
+Resultatet av dette stadiet bør være ett eller flere klassediagrammer som illustrerer hvilke moduler styringssystemet skal bestå av. For å få en ide om hvilken funksjonalitet hver modul må tilby, kan det også være lurt å sette opp et par sekvensdiagrammer som illustrerer hvordan forskjellige moduler samarbeider. I tillegg kan man også benytte kommunikasjons-diagrammer for å gi en bedre oversikt over grensesnittet mellom hver modul. En \textit{modul} kan i denne sammenheng forstås som en softwareenhet som er ansvarlig for å dekke funksjonalitet dere mener er nødvendig for å oppfylle ett eller flere punkter fra FAT'en.
 
 \subsection{Moduldesign}
 Når man har en overordnet tanke over hvilke moduler som kreves for å oppfylle kravspesifikasjonen, er det på tide å skissere hvordan hver modul skal se ut. Et spørsmål som er lurt å ta stilling til her er om hver modul trenger å lagre tilstander eller ikke.
 
-\textbf{Eksempel}: Et kø-system trenger åpenbart å lagre tilstand, mens en modul som utelukkende setter pådrag til motor-styringsboksen kanskje kan skrives uten å ha hukommelse.
+\textbf{Eksempel}: Et køsystem trenger åpenbart å lagre tilstand, mens en modul som utelukkende setter pådrag til motorstyringsboksen kanskje kan skrives uten å ha hukommelse.
 
-En modul som ikke trenger å lagre tilstander vil alltid ha færre måter den kan feile på enn en tilsvarende modul som lagrer tilstand. Det kan derfor være lurt å skille ut delene av systemet som har denne funksjonaliteten i en dedikert tilstandsmaskin, og beholde hjelpemoduler så enkle som mulig.
+En modul som ikke trenger å lagre tilstander vil alltid ha færre måter den kan feile på enn en tilsvarende modul som lagrer tilstand. Det kan derfor være lurt å skille ut delene av systemet som har denne funksjonaliteten i en dedikert tilstandsmaskin, og holde hjelpemoduler så enkle som mulig.
 
-Her bør man altså benytte seg av klasse-diagrammer og tilstands-diagrammer. Motivasjonen for å gjøre dette er at det er mye lettere å eksperimentere og endre på designet på diagramnivå, enn med halvferdig kode.
+Her bør man altså benytte seg av klassediagrammer og tilstandsdiagrammer. Motivasjonen for å gjøre dette er at det er mye lettere å eksperimentere og endre på designet på diagramnivå, enn med halvferdig kode.
 
 \subsection{Implementasjon}
 
 
-Det er på dette stadiet dere skriver kode. Hvis dere har lagt inn en grei innsats i design-fasen, vil dette stadiet stort sett koke ned til å oversette diagrammene til kode. Så feilfritt går det selvsagt aldri, men et godt forarbeid kan spare for mye hodebry. Man burde også ikke være redd for å gå tilbake for å endre på arkitekturen eller modulsammensetningen om man finner mer hensiktsmessige måter å gjøre noe på.
+Det er på dette stadiet dere skriver kode. Hvis dere har lagt inn en grei innsats i designfasen vil dette stadiet stort sett koke ned til å oversette diagrammene til kode. Så feilfritt går det selvsagt aldri, men et godt forarbeid kan spare dere for mye hodebry. Man burde heller ikke være redd for å gå tilbake for å endre på arkitekturen eller modulsammensetningen om man finner mer hensiktsmessige måter å gjøre noe på.
 
-Det kan også være interessant å nevne forskjellen mellom å \textit{programmere inn i et språk} og \textit{programmere i et språk}. Om man programmerer \textit{i et språk}, vil man begrense abstraksjonskonseptene og tankesettet sitt til de primitivene som språket direkte støtter. Om man deretter programmerer \textit{inn i et språk} vil man først bestemme seg for hvilke konsepter man ønsker å strukturere programmet inn i, og deretter finne måter å implementere konseptene på i språket man skriver.
+Det kan også være interessant å nevne forskjellen mellom å \textit{programmere inn i et språk} og \textit{programmere i et språk}. Om man programmerer \textit{i et språk}, vil man begrense abstraksjonskonseptene og tankesettet sitt til de primitivene som språket støtter direkte. Om man derimot programmerer \textit{inn i et språk} vil man først bestemme seg for hvilke konsepter man ønsker å strukturere programmet inn i, og deretter finne måter å implementere konseptene på i språket man skriver.
 
 \textbf{Eksempel}: \verb|C| er i utgangspunktet ikke objektorientert. Allikevel kan man se på hver klasse i et klasse-diagram som en egen modul, hvor alle funksjonene som modulen gjør tilgjengelig svarer til offentlige medlemsfunksjoner i en klasse.
 
-På den annen side er det selvsagt en fordel å benytte seg av de primitivene et språk støtter direkte, fremfor å prøve å tvinge inn funksjonalitet som ikke gis av språket, men det er alltid greit å tenke gjennom et program som en abstrakt oppskrift på hvordan man løser et problem - før man tenker for eksempel: \textit{dette kan implementeres som en klasse som arver fra en annen}.
+På den annen side er det selvsagt en fordel å benytte seg av de primitivene et språk støtter direkte fremfor å prøve å tvinge inn funksjonalitet som ikke gis av språket, men det er alltid greit å tenke gjennom et program som en abstrakt oppskrift på hvordan man løser et problem - før man tenker for eksempel: \textit{dette kan implementeres som en klasse som arver fra en annen}.
 
 \subsection{Enhetstesting}
 
@@ -101,7 +101,7 @@ Enhetstesting speiler moduldesignfasen. Her tester man for å forsikre om at hve
 
 Antallet tester er ikke et bra mål på hvor godt testet en modul er, så sikt heller på å teste forskjellige ting. \textit{Border cases} er stort sett en langt større kilde til feil enn vanlige tilfeller, så det er mye mer verdifullt med \textit{tester som tester forskjellige ting} enn med \textit{forskjellige tester som tester samme ting}.
 
-\textbf{Eksempel}: Gitt at vi har en heis med 10 etasjer. Det kan da være mer fornuftig å lage en test som sjekker om en modul for å håndtere motorstyring av heisen fungerer mellom etasjenummer 2-9, for å deretter sjekke hvordan modulen reagerer på bestillinger til etasjenummer 1 og 10 som er \textit{border cases}. I tillegg er det hensiktsmessig å teste for etasjenummer 0 og 11 slik at man sikrer mot eventuelle feil som kan oppstå om hall-sensorene ikke fanger at heisen har passert etasjenummer 1 eller 10.
+\textbf{Eksempel}: Sett at vi har en heis med 10 etasjer. Da kan det være fornuftig å lage en test som sjekker om en modul som håndterer motorstyring for heisen fungerer mellom etasjenummer 2-9, for å deretter sjekke hvordan modulen reagerer på bestillinger til etasjenummer 1 og 10 som er \textit{border cases}. I tillegg er det hensiktsmessig å teste for etasjenummer 0 og 11 slik at man sikrer mot eventuelle feil som kan oppstå om hall-sensorene ikke fanger at heisen har passert etasjenummer 1 eller 10.
 
 % Det kan være mer fornuftig å lage en test som sjekker om en modul for å håndtere bestillinger bare legger inn bestillinger for etasjenummer 1-4 enn å lage en test som sjekker hvordan modulen responderer på negative tall, en test som sjekker hvordan den reagerer på bestillinger til etasjer høyere enn 4, en test som sjekker hvordan den responderer på bestilling til etasje 0 osv.
 
@@ -110,16 +110,16 @@ Antallet tester er ikke et bra mål på hvor godt testet en modul er, så sikt h
 
 \subsection{Integrasjonstesting}
 
-Enhetstesting foregår på modul-nivå og svarer på spørsmålet: \textit{Fungere denne modulen som den skal?}. Integrasjonstesting speiler arkitekturdesignfasen, og svarer på spørsmålet: \textit{Fungerer denne modulen sammen med andre moduler?}. Her vil man typisk prøve ut hele, eller nesten hele programmet på en spesifikk funksjonalitet. Om man har tatt seg god tid til å lage gode seksvensdiagrammer, kommer disse godt med i denne fasen.
+Enhetstesting foregår på modulnivå og svarer på spørsmålet: \textit{Fungerer denne modulen som den skal?}. Integrasjonstesting speiler arkitekturdesignfasen, og svarer på spørsmålet: \textit{Fungerer denne modulen sammen med andre moduler?} Her vil man typisk prøve ut hele, eller nesten hele, programmet på en spesifikk funksjonalitet. Om man har tatt seg god tid til å lage gode seksvensdiagrammer, kommer disse godt med i denne fasen.
 
-Integrasjonstesting kan enten være en særdeles enkel oppgave, eller veldig komplisert, avhengig av graden kobling man har mellom modulene i programmet. Moduler som avhenger sterkt av andre moduler blir nødvendigvis både vanskeligere å teste, og å vedlikeholde. Derfor er det ønskelig at moduler kun vet om, og kommuniserer med, akkurat de modulene den trenger.
+Integrasjonstesting kan enten være en særdeles enkel oppgave, eller veldig komplisert, avhengig av graden kobling man har mellom modulene i programmet. Moduler som avhenger sterkt av andre moduler blir nødvendigvis både vanskeligere å teste og å vedlikeholde enn moduler med svak kobling til hverandre. Derfor er det ønskelig at moduler kun vet om, og kommuniserer med, akkurat de modulene den trenger.
 
-\textbf{Eksempel}: 23. September 1999 ble \textit{Mars Climate Orbiter} tapt etter at fartøyet enten gikk i stykker i Mars' atmosfære, eller spratt tilbake til en utilsiktet heliosentrisk bane. Styringssystemet til sonden bestod av software skrevet av Lockheed Martin og NASA: Begge hadde testet sine egne moduler, men Lockheed Martin sine moduler opererte med \textit{pund per sekund} (\si{\pound\s}), mens NASA sine moduler opererte med \textit{newton per sekund} (\si{\N\s}). Manglende integrasjonstesting endte totalt opp med å koste NASA JPL omlag 330 millioner amerikanske dollar.
+\textbf{Eksempel}: 23. September 1999 ble \textit{Mars Climate Orbiter} tapt etter at fartøyet enten gikk i stykker i Mars' atmosfære, eller spratt tilbake til en utilsiktet heliosentrisk bane. Styringssystemet til sonden bestod av software skrevet av Lockheed Martin og NASA: Begge hadde testet sine egne moduler, men Lockheed Martin sine moduler opererte med \textit{kraftpundsekunder} (\si{\pound f\s}), mens NASA sine moduler opererte med \textit{newtonsekunder} (\si{\N\s}). Manglende integrasjonstesting endte totalt opp med å koste NASA JPL omlag 330 millioner amerikanske dollar.
 
 
 \section{FAT - Factory Acceptance Test}\label{subsec:FAT}
 
-Kravspesifikasjonene som FAT-en er basert på finner dere i appendiks \ref{app:FATkrav}, mens selve FAT-testen som baserer seg på kravspesifikasjonene finner dere i appendiks \ref{app:FAT-test}. I praksis så er det vanlig at kunde og leverandør avtaler disse på forhånd. FAT-en bestemmer i hvilken grad dere har implementert et korrekt system og er en direkte gjenspeiling av kravspesifikasjonen fra appendiks \ref{app:FATkrav}, så om dere oppfyller alle kravene som er satt av den, har dere implementert et fullverdig system.
+Kravspesifikasjonene som FAT-en er basert på finner dere i appendiks \ref{app:FATkrav}, mens selve FAT-testen som baserer seg på kravspesifikasjonene finner dere i appendiks \ref{app:FAT-test}. I praksis er det vanlig at kunde og leverandør avtaler disse på forhånd. FAT-en bestemmer i hvilken grad dere har implementert et korrekt system og er en direkte gjenspeiling av kravspesifikasjonen fra appendiks \ref{app:FATkrav}, så om dere oppfyller alle kravene som er satt av den, har dere implementert et fullverdig system.
 
 
 \subsection{FAT - Heisspesifikasjoner}\label{app:FATkrav}
@@ -133,8 +133,8 @@ Kravspesifikasjonene som FAT-en er basert på finner dere i appendiks \ref{app:F
     \textbf{Punkt}             & \textbf{Beskrivelse} \\
     \hline
     \textbf{\textcolor{NTNU_blue}{O1}} & Ved oppstart skal heisen alltid komme til en definert tilstand. En definert tilstand betyr at styresystemet vet hvilken etasje heisen står i.\\\cline{1-2} 
-    \textbf{\textcolor{NTNU_blue}{O2}} & Om heisen starter i en udefinert tilstand, skal heissystemet ignorere alle forsøk på å gjøre bestillinger, før systemet er kommet i en definert tilstand.\\\cline{1-2} 
-    \textbf{\textcolor{NTNU_blue}{O3}} & Heissystemet skal ikke ta i betraktning urealistiske start-betingelser, som at heisen er over 4 etasje, eller under 1 etasje idet systemet skrus på.\\\cline{1-2} 
+    \textbf{\textcolor{NTNU_blue}{O2}} & Om heisen starter i en udefinert tilstand skal heissystemet ignorere alle forsøk på å gjøre bestillinger før systemet er kommet i en definert tilstand.\\\cline{1-2} 
+    \textbf{\textcolor{NTNU_blue}{O3}} & Heissystemet skal ikke ta i betraktning urealistiske startbetingelser, som at heisen er over 4. etasje eller under 1. etasje, idet systemet skrus på.\\\cline{1-2} 
     \end{tabular}
 \end{table}
 
@@ -147,9 +147,9 @@ Kravspesifikasjonene som FAT-en er basert på finner dere i appendiks \ref{app:F
     \textbf{Punkt}             & \textbf{Beskrivelse} \\
     \hline
     \textbf{\textcolor{NTNU_blue}{H1}} & Det skal ikke være mulig å komme i en situasjon hvor en bestilling ikke blir tatt. Alle bestillinger skal betjenes selv om nye bestillinger opprettes.\\\cline{1-2} 
-    \textbf{\textcolor{NTNU_blue}{H2}} & Heisen skal ikke betjene bestillinger fra utenfor heisrommet om heisen er i bevegelse i motsatt retning av bestillingen.\\\cline{1-2} 
+    \textbf{\textcolor{NTNU_blue}{H2}} & Heisen skal ikke betjene bestillinger fra utenfor heisrommet dersom heisen er i bevegelse i motsatt retning av bestillingen.\\\cline{1-2} 
     \textbf{\textcolor{NTNU_blue}{H3}} & Når heisen først stopper i en etasje, skal det antas at alle som venter i etasjen går på, og at alle som skal av i etasjen går av. Dermed skal alle ordre i etasjen være regnet som ekspedert.\\\cline{1-2} 
-    \textbf{\textcolor{NTNU_blue}{H4}} & Heisen skal stå stille om den ikke har noen ubetjente bestillinger.\\\cline{1-2}
+    \textbf{\textcolor{NTNU_blue}{H4}} & Heisen skal stå stille dersom den ikke har noen ubetjente bestillinger.\\\cline{1-2}
     \end{tabular}
 \end{table}
 
@@ -157,7 +157,7 @@ Kravspesifikasjonene som FAT-en er basert på finner dere i appendiks \ref{app:F
 
 \begin{table}[H]
     \centering
-    \caption*{\textbf{\textcolor{NTNU_blue}{Krav}: \underline{Bestillingslys- og etasjelys}}}
+    \caption*{\textbf{\textcolor{NTNU_blue}{Krav}: \underline{Bestillings- og etasjelys}}}
     \begin{tabular}{@{}  |p{1.25cm}| p{12.25cm}|  @{}}
     \hline
      \textbf{Punkt}             & \textbf{Beskrivelse} \\
@@ -174,14 +174,14 @@ Kravspesifikasjonene som FAT-en er basert på finner dere i appendiks \ref{app:F
 
 \begin{table}[H]
     \centering
-    \caption*{\textbf{\textcolor{NTNU_blue}{Krav}: \underline{Heis-dør}}}
+    \caption*{\textbf{\textcolor{NTNU_blue}{Krav}: \underline{Heisdør}}}
     \begin{tabular}{@{}  |p{1.25cm}| p{12.25cm}|  @{}}
     \hline
       \textbf{Punkt}             & \textbf{Beskrivelse} \\
     \hline
     \textbf{\textcolor{NTNU_blue}{D1}} & Når heisen ankommer en etasje det er gjort bestilling til, skal døren åpnes i 3 sekunder, for deretter å lukkes.\\\cline{1-2} 
     \textbf{\textcolor{NTNU_blue}{D2}} & Heisen skal være lukket når den ikke har ubetjente bestillinger.\\\cline{1-2} 
-    \textbf{\textcolor{NTNU_blue}{D3}} & Hvis stoppknappen trykkes mens heisen er i en etasje, skal døren åpne seg. Døren skal forholde seg åpen så lenge stoppknappen er aktivert, og ytterligere 3 sekunder etter at stoppknappen er sluppet. Deretter skal døren lukke seg.\\\cline{1-2} 
+    \textbf{\textcolor{NTNU_blue}{D3}} & Hvis stoppknappen trykkes mens heisen er i en etasje, skal døren åpne seg. Døren skal forbli åpen så lenge stoppknappen er aktivert, og ytterligere 3 sekunder etter at stoppknappen er sluppet. Deretter skal døren lukke seg.\\\cline{1-2} 
     \textbf{\textcolor{NTNU_blue}{D4}} & Om obstruksjonsbryteren er aktivert mens døren først er åpen, skal den forbli åpen så lenge bryteren er aktiv. Når obstruksjonssignalet går lavt, skal døren lukke seg etter 3 sekunder.\\\cline{1-2} 
     \end{tabular}
 \end{table}
@@ -197,7 +197,7 @@ Kravspesifikasjonene som FAT-en er basert på finner dere i appendiks \ref{app:F
     \hline
     \textbf{\textcolor{NTNU_blue}{S1}} & Heisen skal alltid stå stille når døren er åpen.\\\cline{1-2} 
     \textbf{\textcolor{NTNU_blue}{S2}} & Heisdøren skal aldri åpne seg utenfor en etasje.\\\cline{1-2} 
-    \textbf{\textcolor{NTNU_blue}{S3}} & Heisen skal aldri kjøre utenfor området definert av 1 til 4 etasje.\\\cline{1-2} 
+    \textbf{\textcolor{NTNU_blue}{S3}} & Heisen skal aldri kjøre utenfor området definert av 1. til 4. etasje.\\\cline{1-2} 
     \textbf{\textcolor{NTNU_blue}{S4}} & Om stoppknappen trykkes, skal heisen stoppe momentant.\\\cline{1-2} 
     \textbf{\textcolor{NTNU_blue}{S5}} & Om stoppknappen trykkes, skal alle heisens ubetjente bestillinger slettes.\\\cline{1-2} 
     \textbf{\textcolor{NTNU_blue}{S6}} & Så lenge stoppknappen holdes inne, skal heisen ignorere alle forsøk på å gjøre bestillinger.\\\cline{1-2} 
@@ -330,7 +330,7 @@ Merk også at "feil" (dvs. åpen-sløyfe, se under) bruk av KI til å oppnå må
 
 Angående bruk av kunstig intelligens (KI) i programvareutvikling, kan man skille mellom to ulike bruksvarianter: åpen-sløyfe-bruk, og lukket-sløyfe-bruk. I kybernetikken introduseres vi for mange ulike redskap som vi kan benytte oss av til problemløsning, for eksempel Fourier-analyse og PID-regulatorer. KI kan også sees på som et slikt redskap, og i likhet med de andre redskapene, er vi nødt til å vite hvordan man faktisk skal bruke det. På samme måte som en kalkulator eller en datamaskin kan regne ut regnestykker for oss, kan KI hjelpe oss å løse problemer som ellers hadde vært tidskrevende. Det som skiller KI og en kalkulator er innsikt i hvordan redskapene fungerer. Vi stoler på en kalkulator siden vi kan reprodusere og bekrefte informasjonen den gir oss via matematikk og algoritmer vi har lært gjennom utdanningen vår. På samme måte er det viktig at vi er klar over hvilken variant av KI vi bruker, og sørger for å bekrefte informasjonen KI-en gir oss, for å lukke sløyfen. Det spiller ingen rolle hvor rett kalkulatoren regner om vi skriver inn feil input, og det samme gjelder KI, spesielt av typen tekstgenererende språkmodeller som OpenAI sin \verb|ChatGPT| og Meta sin \verb|Llama|. Kort fortalt prøver språkmodeller å forutsi hva neste ord bør være gitt en tekststreng. Store språkmodeller er ikke-deterministiske, og har tendenser til å "hallusinere", altså at språkmodellen oppgir falsk informasjon som fakta. Hold derfor et kritisk blikk på hallusineringshyppigheten til språkmodellene dere bruker. Vi anbefaler at dere tar en titt på \href{https://huggingface.co/spaces/vectara/leaderboard}{denne siden} med hallusineringshyppigheter før dere eventuelt tar i bruk KI i dette faget eller andre fag under studiet.
 
-Oppsummert forventer vi to ting fra studenter i TTK4235 når det gjleder KI: at dere ikke bruker KI i åpen-sløyfe, og at dere alltid har et kritisk blikk på hva som genereres. I tillegg forventer vi at dere er ærlige om bruk av KI, og ikke angir arbeidet til KI som deres eget. 
+Oppsummert forventer vi to ting fra studenter i TTK4235 når det gjleder KI: at dere ikke bruker KI i åpen sløyfe, og at dere alltid har et kritisk blikk på hva som genereres. I tillegg forventer vi at dere er ærlige om bruk av KI, og ikke angir arbeidet til KI som deres eget. 
 
 \section{Appendiks - Kommentar til refleksjonsdelen}\label{app:refleksjon}
 
